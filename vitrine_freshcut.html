@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FreshCut — Click & Collect Fruits & Smoothies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1a5c2e;
+    --green-mid: #2d8a4e;
+    --green-light: #4db870;
+    --green-pale: #d4f0de;
+    --orange: #e8602c;
+    --orange-light: #f7b27a;
+    --cream: #faf7f0;
+    --cream-dark: #f0ead8;
+    --dark: #0f1a0f;
+    --dark-soft: #1e2e1e;
+    --text-muted: #5a6b5a;
+    --white: #ffffff;
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ——— NAV ——— */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(250, 247, 240, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(26,92,46,0.1);
+    transition: var(--transition);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--green);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--orange); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green);
+    color: var(--white) !important;
+    padding: 0.65rem 1.5rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600 !important;
+    transition: background var(--transition), transform var(--transition) !important;
+  }
+  .nav-cta:hover { background: var(--dark) !important; transform: translateY(-1px); }
+
+  /* ——— HERO ——— */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 5vw 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 80% 30%, rgba(77,184,112,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(232,96,44,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--green-pale);
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: '🌿'; font-size: 0.85rem; }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+  .hero-title .accent { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 44ch;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(26,92,46,0.25);
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,92,46,0.3); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--green-pale);
+    padding-bottom: 2px;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .btn-secondary:hover { border-color: var(--green); }
+  .btn-secondary svg { transition: transform var(--transition); }
+  .btn-secondary:hover svg { transform: translateX(4px); }
+
+  /* hero visual */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-phone-wrap {
+    position: relative;
+    width: 280px;
+  }
+
+  .hero-phone {
+    width: 280px;
+    height: 560px;
+    background: var(--dark-soft);
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.25),
+      0 0 0 1px rgba(255,255,255,0.05) inset;
+    position: relative;
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-14px) rotate(-2deg); }
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--cream);
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-statusbar {
+    height: 40px;
+    background: var(--green);
+    display: flex;
+    align-items: flex-end;
+    padding: 0 16px 8px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .phone-header {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .phone-header-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .phone-store-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .phone-store-dot { width: 6px; height: 6px; background: var(--green-light); border-radius: 50%; }
+
+  .phone-categories {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    overflow-x: auto;
+    background: white;
+  }
+  .phone-cat {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .phone-cat.active { background: var(--green); color: white; }
+  .phone-cat:not(.active) { background: var(--cream); color: var(--text-muted); }
+
+  .phone-products {
+    flex: 1;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .phone-product {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .phone-product-emoji { font-size: 24px; }
+  .phone-product-name { font-size: 10px; font-weight: 600; color: var(--dark); }
+  .phone-product-price { font-size: 11px; font-weight: 700; color: var(--green); }
+  .phone-product-add {
+    margin-top: 4px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .phone-cart-bar {
+    background: var(--green);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* floating badges around phone */
+  .float-badge {
+    position: absolute;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 0.7rem 1rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 3;
+    white-space: nowrap;
+  }
+  .badge-top {
+    top: 60px; right: -50px;
+    animation: float 6s 1s ease-in-out infinite;
+  }
+  .badge-mid {
+    bottom: 160px; left: -60px;
+    animation: float 6s 2s ease-in-out infinite;
+  }
+  .badge-bot {
+    bottom: 80px; right: -40px;
+    animation: float 6s 3s ease-in-out infinite;
+  }
+  .badge-icon { font-size: 1.2rem; }
+
+  /* ——— STRIP ——— */
+  .strip {
+    background: var(--green);
+    color: white;
+    padding: 1rem 5vw;
+    display: flex;
+    gap: 3rem;
+    overflow-x: auto;
+    align-items: center;
+  }
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+    font-size: 0.88rem;
+    font-weight: 500;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+  .strip-item span { font-size: 1.1rem; }
+
+  /* ——— SECTIONS ——— */
+  section { padding: 6rem 5vw; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--dark);
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--green); }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 50ch;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* ——— HOW IT WORKS ——— */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .how-step {
+    position: relative;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(26,92,46,0.08);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .how-step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--green-pale);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .step-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .step-title { font-weight: 700; font-size: 1.05rem; color: var(--dark); margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ——— PRODUCTS ——— */
+  .products-section { background: var(--dark); color: white; border-radius: 2rem; margin: 0 2vw; }
+  .products-section .section-title { color: white; }
+  .products-section .section-sub { color: rgba(255,255,255,0.55); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .product-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, var(--card-color) 0%, transparent 70%);
+    opacity: 0.25;
+    border-radius: 50%;
+  }
+
+  .product-card.fruits { --card-color: #e8602c; }
+  .product-card.smoothies { --card-color: #4db870; }
+  .product-card.jus { --card-color: #f7b27a; }
+  .product-card.mix { --card-color: #a8d8ea; }
+
+  .product-emoji { font-size: 3rem; margin-bottom: 1rem; }
+  .product-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .product-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1.2rem; }
+  .product-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .product-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ——— FEATURES ——— */
+  .features-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .features-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .feature-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: white;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(26,92,46,0.06);
+    transition: box-shadow var(--transition);
+  }
+  .feature-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: var(--green-pale);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+  .feature-title { font-weight: 700; margin-bottom: 0.3rem; color: var(--dark); }
+  .feature-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  .features-visual {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    border: 1px solid rgba(26,92,46,0.08);
+  }
+  .dash-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--dark); }
+  .dash-stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .dash-stat {
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+  .dash-stat-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .dash-stat-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--green); }
+
+  .dash-orders { display: flex; flex-direction: column; gap: 0.6rem; }
+  .dash-order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+  .dash-order.ready { background: var(--green-pale); }
+  .dash-order.pending { background: rgba(232,96,44,0.08); }
+  .dash-order.preparing { background: rgba(247,178,122,0.2); }
+
+  .order-name { font-weight: 600; }
+  .order-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .badge-ready { background: var(--green); color: white; }
+  .badge-pending { background: var(--orange); color: white; }
+  .badge-prep { background: var(--orange-light); color: var(--dark); }
+
+  /* ——— ROLES ——— */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .role-card {
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: transform var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .role-card:hover { transform: translateY(-4px); }
+  .role-card.guest { background: var(--cream-dark); border: 1px solid var(--cream-dark); }
+  .role-card.client { background: var(--green-pale); border: 1px solid rgba(45,138,78,0.2); }
+  .role-card.manager { background: rgba(232,96,44,0.08); border: 1px solid rgba(232,96,44,0.15); }
+  .role-card.admin { background: var(--dark); color: white; }
+
+  .role-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .role-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .role-card.admin .role-name { color: white; }
+  .role-perks { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .role-perks li { font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); }
+  .role-card.admin .role-perks li { color: rgba(255,255,255,0.65); }
+  .role-perks li::before { content: '✓'; font-weight: 700; color: var(--green); flex-shrink: 0; }
+  .role-card.admin .role-perks li::before { color: var(--green-light); }
+
+  /* ——— PAYMENT ——— */
+  .payment-section {
+    background: white;
+    border-radius: 2rem;
+    margin: 0 2vw;
+    text-align: center;
+    padding: 6rem 5vw;
+  }
+  .payment-logos { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
+  .pay-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.8rem;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dark);
+    letter-spacing: 0.02em;
+  }
+
+  /* ——— CTA ——— */
+  .cta-section {
+    background: var(--green);
+    color: white;
+    text-align: center;
+    border-radius: 2rem;
+    margin: 0 2vw;
+    padding: 6rem 5vw;
+  }
+  .cta-section .section-title { color: white; }
+  .cta-section .section-sub { color: rgba(255,255,255,0.7); max-width: 50ch; margin: 0 auto 2.5rem; }
+
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: var(--green);
+    text-decoration: none;
+    padding: 1rem 2.2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2.2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.4);
+    transition: border-color var(--transition), background var(--transition);
+  }
+  .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  /* ——— FOOTER ——— */
+  footer {
+    padding: 3rem 5vw 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--green);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--orange); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: color var(--transition);
+  }
+  .footer-links a:hover { color: var(--green); }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    width: 100%;
+    border-top: 1px solid var(--cream-dark);
+    padding-top: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ——— ANIMATIONS ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ——— RESPONSIVE ——— */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; text-align: center; }
+    .hero-sub { margin: 0 auto 2rem; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { display: none; }
+    .features-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .nav-links { display: none; }
+    .hero-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Fresh<span>Cut</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#products">Produits</a></li>
+    <li><a href="#roles">Fonctionnalités</a></li>
+    <li><a href="#contact" class="nav-cta">Commander maintenant</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Click &amp; Collect · Même jour</div>
+    <h1 class="hero-title">
+      Du frais,<br>
+      <em>livré en main</em><br>
+      <span class="accent">propre.</span>
+    </h1>
+    <p class="hero-sub">Fruits découpés, smoothies et jus de fruits frais à commander sur mobile et à retirer en boutique. Aujourd'hui ou quand vous voulez.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        🍊 Découvrir l'app
+      </a>
+      <a href="#how" class="btn-secondary">
+        En savoir plus
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Phone mockup -->
+  <div class="hero-visual">
+    <div class="hero-phone-wrap">
+      <div class="hero-phone">
+        <div class="phone-screen">
+          <div class="phone-statusbar">FreshCut</div>
+          <div class="phone-header">
+            <div class="phone-header-title">Bonjour 👋</div>
+            <div class="phone-store-selector">
+              <div class="phone-store-dot"></div>
+              Boutique République — Ouverte
+            </div>
+          </div>
+          <div class="phone-categories">
+            <div class="phone-cat active">Tous</div>
+            <div class="phone-cat">Fruits 🍉</div>
+            <div class="phone-cat">Smoothies 🥤</div>
+            <div class="phone-cat">Jus 🍊</div>
+          </div>
+          <div class="phone-products">
+            <div class="phone-product">
+              <div class="phone-product-emoji">🍉</div>
+              <div class="phone-product-name">Pastèque fraîche</div>
+              <div class="phone-product-price">3,50 €</div>
+              <button class="phone-product-add">+ Ajouter</button>
+            </div>
+            <div class="phone-product">
+              <div class="phone-product-emoji">🥤</div>
+              <div class="phone-product-name">Smoothie Mango</div>
+              <div class="phone-product-price">5,80 €</div>
+              <button class="phone-product-add">+ Ajouter</button>
+            </div>
+            <div class="phone-product">
+              <div class="phone-product-emoji">🍊</div>
+              <div class="phone-product-name">Jus d'orange</div>
+              <div class="phone-product-price">4,20 €</div>
+              <button class="phone-product-add">+ Ajouter</button>
+            </div>
+            <div class="phone-product">
+              <div class="phone-product-emoji">🍓</div>
+              <div class="phone-product-name">Mix Fruits Rouges</div>
+              <div class="phone-product-price">4,90 €</div>
+              <button class="phone-product-add">+ Ajouter</button>
+            </div>
+          </div>
+          <div class="phone-cart-bar">
+            <span>🛒 2 articles</span>
+            <span>Commander → 9,30 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- floating badges -->
+      <div class="float-badge badge-top">
+        <span class="badge-icon">⚡</span>
+        <span>Prêt en 15 min</span>
+      </div>
+      <div class="float-badge badge-mid">
+        <span class="badge-icon">📍</span>
+        <span>3 boutiques</span>
+      </div>
+      <div class="float-badge badge-bot">
+        <span class="badge-icon">♻️</span>
+        <span>100% frais</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span>🍊</span> Fruits de saison découpés</div>
+  <div class="strip-item"><span>🥤</span> Smoothies faits minute</div>
+  <div class="strip-item"><span>🍋</span> Jus fraîchement pressés</div>
+  <div class="strip-item"><span>⏱️</span> Retrait le jour même</div>
+  <div class="strip-item"><span>📱</span> iOS &amp; Android</div>
+  <div class="strip-item"><span>🔄</span> Abonnements disponibles</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">Comment ça marche</div>
+  <h2 class="section-title">Commandez en 3 étapes,<br><em>simple comme bonjour</em></h2>
+  <p class="section-sub">De la sélection du magasin jusqu'au retrait de votre commande fraîche — tout se passe sur votre téléphone.</p>
+
+  <div class="how-grid">
+    <div class="how-step fade-in">
+      <div class="step-num">01</div>
+      <div class="step-icon">📍</div>
+      <div class="step-title">Choisissez votre boutique</div>
+      <p class="step-desc">Sélectionnez le magasin FreshCut le plus proche ou le plus pratique. Chaque boutique a son propre catalogue mis à jour en temps réel.</p>
+    </div>
+    <div class="how-step fade-in">
+      <div class="step-num">02</div>
+      <div class="step-icon">🛒</div>
+      <div class="step-title">Composez votre panier</div>
+      <p class="step-desc">Fruits découpés, smoothies ou jus pressés — choisissez pour aujourd'hui ou planifiez à l'avance. Configurez même un abonnement récurrent.</p>
+    </div>
+    <div class="how-step fade-in">
+      <div class="step-num">03</div>
+      <div class="step-icon">💳</div>
+      <div class="step-title">Payez en sécurité</div>
+      <p class="step-desc">Réglez par carte via Stripe ou PayPal. Votre commande est confirmée et préparée par votre boutique, fraîchement, pour l'heure que vous avez choisie.</p>
+    </div>
+    <div class="how-step fade-in">
+      <div class="step-num">04</div>
+      <div class="step-icon">🎉</div>
+      <div class="step-title">Récupérez, savourez</div>
+      <p class="step-desc">Vous recevez une notification quand c'est prêt. Plus qu'à passer en boutique et repartir avec votre commande ultra-fraîche. Zéro attente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="products-section">
+  <div class="section-tag" style="color: var(--orange-light);">Notre catalogue</div>
+  <h2 class="section-title">Du frais, <em style="color: var(--green-light);">toujours</em></h2>
+  <p class="section-sub">Préparés chaque matin dans votre boutique, jamais transformés, jamais congelés.</p>
+
+  <div class="products-grid">
+    <div class="product-card fruits fade-in">
+      <div class="product-emoji">🍉</div>
+      <div class="product-name">Fruits Découpés</div>
+      <p class="product-desc">Pastèque, mangue, ananas, melon, fruits rouges… Préparés le matin même, portionnés à la demande.</p>
+      <div class="product-tags">
+        <span class="product-tag">Sans sucre ajouté</span>
+        <span class="product-tag">Portions fraîches</span>
+        <span class="product-tag">Saison</span>
+      </div>
+    </div>
+    <div class="product-card smoothies fade-in">
+      <div class="product-emoji">🥤</div>
+      <div class="product-name">Smoothies</div>
+      <p class="product-desc">Mixés à la commande, sans conservateurs. Formules classiques ou créations saisonnières par vos gérants.</p>
+      <div class="product-tags">
+        <span class="product-tag">Mixé minute</span>
+        <span class="product-tag">Personnalisable</span>
+        <span class="product-tag">Vegan</span>
+      </div>
+    </div>
+    <div class="product-card jus fade-in">
+      <div class="product-emoji">🍊</div>
+      <div class="product-name">Jus Pressés</div>
+      <p class="product-desc">Orange, citron, pomme-gingembre… Pressés le jour J. Aucun additif. Un vrai goût de reviens-y.</p>
+      <div class="product-tags">
+        <span class="product-tag">Pressé à froid</span>
+        <span class="product-tag">100% pur jus</span>
+        <span class="product-tag">Vitaminé</span>
+      </div>
+    </div>
+    <div class="product-card mix fade-in">
+      <div class="product-emoji">🌈</div>
+      <div class="product-name">Formules &amp; Boxes</div>
+      <p class="product-desc">Combinez fruits + jus + smoothie dans une box équilibrée. Idéal pour le bureau ou la pause repas.</p>
+      <div class="product-tags">
+        <span class="product-tag">Box équilibrée</span>
+        <span class="product-tag">Pour 1 ou 2</span>
+        <span class="product-tag">Abonnable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES / MANAGER DASH -->
+<section id="roles">
+  <div class="features-layout">
+    <div>
+      <div class="section-tag">Fonctionnalités</div>
+      <h2 class="section-title">Un outil pensé<br><em>pour tout le monde</em></h2>
+      <p class="section-sub">Que vous soyez client, gérant de boutique ou administrateur — chaque rôle dispose d'un espace taillé sur mesure.</p>
+      <div class="features-list">
+        <div class="feature-item fade-in">
+          <div class="feature-icon">📱</div>
+          <div>
+            <div class="feature-title">Commander en tant qu'invité ou membre</div>
+            <p class="feature-desc">Passez commande sans créer de compte, ou profitez d'un espace client avec historique et abonnements récurrents.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🔄</div>
+          <div>
+            <div class="feature-title">Abonnements et commandes récurrentes</div>
+            <p class="feature-desc">Planifiez vos commandes hebdomadaires ou mensuelles. Annulable à tout moment, sans engagement.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🧑‍💼</div>
+          <div>
+            <div class="feature-title">Dashboard gérant par boutique</div>
+            <p class="feature-desc">Chaque manager gère son propre catalogue, ses promos et ses commandes en temps réel. Gestion indépendante, vue centralisée pour l'admin.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🔒</div>
+          <div>
+            <div class="feature-title">Conforme RGPD</div>
+            <p class="feature-desc">Mentions légales, politique de confidentialité, droit à l'oubli, cookies — toutes les pages réglementaires intégrées d'emblée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="features-visual fade-in">
+      <div class="dash-title">📊 Dashboard Gérant — Boutique République</div>
+      <div class="dash-stat-row">
+        <div class="dash-stat">
+          <div class="dash-stat-label">Commandes</div>
+          <div class="dash-stat-value">24</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-label">CA aujourd'hui</div>
+          <div class="dash-stat-value">186€</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-label">En attente</div>
+          <div class="dash-stat-value" style="color: var(--orange);">5</div>
+        </div>
+      </div>
+      <div class="dash-orders">
+        <div class="dash-order ready">
+          <div>
+            <div class="order-name">Marie D. — Box Mango</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 12h30</div>
+          </div>
+          <span class="order-badge badge-ready">Prêt ✓</span>
+        </div>
+        <div class="dash-order pending">
+          <div>
+            <div class="order-name">Lucas M. — Jus orange ×2</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 13h00</div>
+          </div>
+          <span class="order-badge badge-pending">À préparer</span>
+        </div>
+        <div class="dash-order preparing">
+          <div>
+            <div class="order-name">Sophie K. — Smoothie Fraise</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 13h15</div>
+          </div>
+          <span class="order-badge badge-prep">En cours…</span>
+        </div>
+        <div class="dash-order ready">
+          <div>
+            <div class="order-name">Ahmed T. — Fruits Rouges 250g</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 12h00</div>
+          </div>
+          <span class="order-badge badge-ready">Prêt ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section style="padding-top: 2rem;">
+  <div class="section-tag">Accès &amp; Rôles</div>
+  <h2 class="section-title" style="margin-bottom: 0.8rem;">4 profils, <em>une expérience fluide</em></h2>
+  <p class="section-sub">Chaque utilisateur trouve son espace, ses droits, ses outils.</p>
+
+  <div class="roles-grid">
+    <div class="role-card guest fade-in">
+      <div class="role-icon">👤</div>
+      <div class="role-name">Invité</div>
+      <ul class="role-perks">
+        <li>Commander sans créer de compte</li>
+        <li>Fournir email pour la confirmation</li>
+        <li>Reçoit une invitation à s'inscrire</li>
+      </ul>
+    </div>
+    <div class="role-card client fade-in">
+      <div class="role-icon">🙋</div>
+      <div class="role-name">Client</div>
+      <ul class="role-perks">
+        <li>Historique de toutes les commandes</li>
+        <li>Abonnements récurrents annulables</li>
+        <li>Notifications de suivi en temps réel</li>
+        <li>Profil &amp; préférences sauvegardés</li>
+      </ul>
+    </div>
+    <div class="role-card manager fade-in">
+      <div class="role-icon">🧑‍🍳</div>
+      <div class="role-name">Manager</div>
+      <ul class="role-perks">
+        <li>Gestion de sa boutique uniquement</li>
+        <li>Ajout / modif / suppression produits</li>
+        <li>Accepter, refuser, marquer prêt</li>
+        <li>Créer des promotions</li>
+        <li>Suivi historique de sa boutique</li>
+      </ul>
+    </div>
+    <div class="role-card admin fade-in">
+      <div class="role-icon">🛡️</div>
+      <div class="role-name">Administrateur</div>
+      <ul class="role-perks">
+        <li>Vue globale de toutes les boutiques</li>
+        <li>Accès à tous les comptes et données</li>
+        <li>Suivi des commandes depuis le début</li>
+        <li>Tableau de bord multi-boutiques</li>
+        <li>Gestion complète des utilisateurs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="payment-section">
+  <div class="section-tag">Paiement sécurisé</div>
+  <h2 class="section-title">Réglez comme<br><em>vous préférez</em></h2>
+  <p class="section-sub" style="margin: 0 auto 1.5rem;">Carte bancaire via Stripe ou PayPal — deux solutions fiables et sécurisées, vos données ne transitent jamais en clair.</p>
+  <div class="payment-logos">
+    <div class="pay-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#635BFF"><path d="M13.479 9.883c-2.088 0-3.519 1.049-3.519 2.643 0 1.594 1.431 2.642 3.519 2.642 2.089 0 3.52-1.048 3.52-2.642 0-1.594-1.431-2.643-3.52-2.643z"/><path fill-rule="evenodd" d="M0 12C0 5.373 5.373 0 12 0c6.628 0 12 5.373 12 12s-5.372 12-12 12S0 18.627 0 12zm12-8.5C7.253 3.5 3.5 7.253 3.5 12S7.253 20.5 12 20.5 20.5 16.747 20.5 12 16.747 3.5 12 3.5z" clip-rule="evenodd"/></svg>
+      Stripe
+    </div>
+    <div class="pay-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H4.272a.641.641 0 0 1-.633-.74L5.784 2.85a.641.641 0 0 1 .634-.537h5.018c2.282 0 3.867.503 4.71 1.497.411.473.674 1.03.78 1.663.113.67.056 1.47-.175 2.421L16.7 8c.025-.14.04-.28.04-.416 0-.855-.303-1.565-.91-2.135C15.207 4.893 13.9 4.5 12.04 4.5H7.22L5.05 19.5h2.026V21.337z"/></svg>
+      PayPal
+    </div>
+  </div>
+  <p style="font-size: 0.82rem; color: var(--text-muted);">🔒 Paiements chiffrés SSL — conformité PCI DSS — aucune donnée bancaire stockée</p>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <div class="section-tag" style="color: var(--orange-light);">Bientôt disponible</div>
+  <h2 class="section-title">Prêt à commander<br><em style="color: var(--green-light);">du frais</em> ?</h2>
+  <p class="section-sub">L'application FreshCut arrive bientôt sur iOS et Android. Inscrivez-vous pour être parmi les premiers à y accéder.</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-white">📱 Rejoindre la liste d'attente</a>
+    <a href="#" class="btn-ghost">En savoir plus →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Fresh<span>Cut</span></a>
+  <ul class="footer-links">
+    <li><a href="freshcut_legal.html">Mentions légales</a></li>
+    <li><a href="freshcut_legal.html">Politique de confidentialité</a></li>
+    <li><a href="freshcut_legal.html">RGPD</a></li>
+    <li><a href="freshcut_legal.html">Cookies</a></li>
+    <li><a href="freshcut_legal.html">Contact</a></li>
+  </ul>
+  <div class="footer-copy">
+    © 2025 FreshCut — Tous droits réservés. Application de Click &amp; Collect de fruits frais découpés, smoothies et jus pressés.
+  </div>
+</footer>
+
+<script>
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.08) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.08)' : 'none';
+  });
+</script>
+</body>
+</html>

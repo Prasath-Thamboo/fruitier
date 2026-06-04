@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FreshCut — Pages Légales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#1a5c2e;
+  --green-mid:#2d8a4e;
+  --green-light:#4db870;
+  --green-pale:#d4f0de;
+  --orange:#e8602c;
+  --cream:#faf7f0;
+  --cream-dark:#f0ead8;
+  --dark:#0f1a0f;
+  --dark-soft:#1e2e1e;
+  --text-muted:#5a6b5a;
+  --white:#ffffff;
+  --sidebar-w:260px;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --tr:0.3s cubic-bezier(0.4,0,0.2,1);
+  --radius:14px;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  background:var(--cream);
+  color:var(--dark);
+  line-height:1.7;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ——— TOP BAR ——— */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:58px;
+  background:rgba(250,247,240,0.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(26,92,46,0.1);
+  display:flex;align-items:center;
+  padding:0 1.5rem;
+  gap:1.5rem;
+}
+.topbar-logo{
+  font-family:var(--font-display);
+  font-size:1.35rem;font-weight:900;
+  color:var(--green);text-decoration:none;
+}
+.topbar-logo span{color:var(--orange);}
+.topbar-sep{color:var(--cream-dark);font-size:1.2rem;}
+.topbar-page{font-size:0.82rem;font-weight:500;color:var(--text-muted);}
+.topbar-back{
+  margin-left:auto;
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.82rem;font-weight:600;
+  color:var(--green);text-decoration:none;
+  padding:0.4rem 1rem;
+  border:1px solid var(--green-pale);
+  border-radius:999px;
+  transition:background var(--tr),border-color var(--tr);
+}
+.topbar-back:hover{background:var(--green-pale);}
+
+/* ——— LAYOUT ——— */
+.layout{
+  display:flex;
+  padding-top:58px;
+  min-height:100vh;
+}
+
+/* ——— SIDEBAR ——— */
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  position:fixed;
+  top:58px;bottom:0;left:0;
+  overflow-y:auto;
+  background:white;
+  border-right:1px solid rgba(26,92,46,0.08);
+  padding:2rem 1.25rem;
+  display:flex;flex-direction:column;gap:0.3rem;
+}
+.sidebar-label{
+  font-size:0.68rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--text-muted);
+  padding:0.4rem 0.75rem;
+  margin-top:0.5rem;margin-bottom:0.2rem;
+}
+.nav-btn{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.65rem 0.9rem;
+  border-radius:10px;
+  border:none;background:transparent;
+  cursor:pointer;
+  text-align:left;width:100%;
+  font-family:var(--font-body);
+  font-size:0.88rem;font-weight:500;
+  color:var(--text-muted);
+  transition:background var(--tr),color var(--tr);
+}
+.nav-btn:hover{background:var(--cream);color:var(--dark);}
+.nav-btn.active{background:var(--green-pale);color:var(--green);font-weight:600;}
+.nav-icon{font-size:1.05rem;width:20px;text-align:center;flex-shrink:0;}
+
+/* ——— CONTENT ——— */
+.content{
+  margin-left:var(--sidebar-w);
+  flex:1;
+  padding:3rem 4rem 5rem;
+  max-width:820px;
+}
+
+/* ——— PAGE ——— */
+.page{display:none;}
+.page.active{display:block;animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:none;}
+}
+
+.page-eyebrow{
+  display:inline-block;
+  font-size:0.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--orange);
+  margin-bottom:0.75rem;
+}
+.page-title{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-0.025em;
+  color:var(--dark);
+  margin-bottom:0.6rem;
+}
+.page-title em{font-style:italic;color:var(--green);}
+.page-date{
+  font-size:0.8rem;color:var(--text-muted);
+  margin-bottom:2.5rem;
+  padding-bottom:2rem;
+  border-bottom:1px solid var(--cream-dark);
+}
+.page-date strong{color:var(--dark);}
+
+/* content typography */
+h2.sec{
+  font-family:var(--font-display);
+  font-size:1.35rem;font-weight:700;
+  color:var(--dark);
+  margin:2.5rem 0 0.8rem;
+  padding-left:1rem;
+  border-left:3px solid var(--green);
+}
+h3.subsec{
+  font-size:1rem;font-weight:600;
+  color:var(--dark);
+  margin:1.5rem 0 0.5rem;
+}
+p{
+  font-size:0.95rem;color:#3a4a3a;
+  margin-bottom:0.9rem;
+  line-height:1.75;
+  font-weight:300;
+}
+ul.legal{
+  list-style:none;
+  margin:0.5rem 0 1rem 0;
+  display:flex;flex-direction:column;gap:0.4rem;
+}
+ul.legal li{
+  font-size:0.92rem;color:#3a4a3a;font-weight:300;
+  padding-left:1.4rem;
+  position:relative;line-height:1.65;
+}
+ul.legal li::before{
+  content:'—';
+  position:absolute;left:0;
+  color:var(--green-light);font-weight:600;
+}
+.info-box{
+  background:var(--green-pale);
+  border-radius:var(--radius);
+  padding:1.25rem 1.5rem;
+  margin:1.5rem 0;
+  border-left:3px solid var(--green);
+}
+.info-box p{margin:0;font-size:0.9rem;color:var(--green);}
+.warn-box{
+  background:rgba(232,96,44,0.08);
+  border-radius:var(--radius);
+  padding:1.25rem 1.5rem;
+  margin:1.5rem 0;
+  border-left:3px solid var(--orange);
+}
+.warn-box p{margin:0;font-size:0.9rem;color:var(--orange);}
+table.legal-table{
+  width:100%;border-collapse:collapse;
+  margin:1.25rem 0;font-size:0.88rem;
+}
+table.legal-table th{
+  background:var(--green);color:white;
+  padding:0.65rem 1rem;text-align:left;font-weight:600;
+}
+table.legal-table td{
+  padding:0.65rem 1rem;
+  border-bottom:1px solid var(--cream-dark);
+  color:#3a4a3a;font-weight:300;vertical-align:top;
+}
+table.legal-table tr:last-child td{border-bottom:none;}
+table.legal-table tr:nth-child(even) td{background:rgba(212,240,222,0.25);}
+.tag{
+  display:inline-block;
+  font-size:0.72rem;font-weight:700;
+  padding:2px 9px;border-radius:999px;
+  background:var(--green-pale);color:var(--green);
+  margin-right:4px;
+}
+.tag.warn{background:rgba(232,96,44,0.12);color:var(--orange);}
+
+/* ——— CONTACT FORM ——— */
+.contact-form{
+  margin-top:2rem;
+  display:flex;flex-direction:column;gap:1.2rem;
+}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-label{
+  font-size:0.83rem;font-weight:600;
+  color:var(--dark);letter-spacing:0.01em;
+}
+.form-input,.form-select,.form-textarea{
+  font-family:var(--font-body);
+  font-size:0.92rem;font-weight:300;
+  padding:0.75rem 1rem;
+  border:1.5px solid var(--cream-dark);
+  border-radius:10px;
+  background:white;
+  color:var(--dark);
+  outline:none;
+  transition:border-color var(--tr),box-shadow var(--tr);
+  width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(26,92,46,0.08);
+}
+.form-textarea{min-height:120px;resize:vertical;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.btn-submit{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--green);color:white;
+  border:none;cursor:pointer;
+  font-family:var(--font-body);
+  font-size:0.95rem;font-weight:600;
+  padding:0.9rem 2rem;
+  border-radius:999px;
+  transition:background var(--tr),transform var(--tr);
+  align-self:flex-start;
+  box-shadow:0 4px 16px rgba(26,92,46,0.22);
+}
+.btn-submit:hover{background:var(--dark);transform:translateY(-2px);}
+.contact-info-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1rem;margin:1.5rem 0;
+}
+.contact-info-card{
+  background:white;border-radius:var(--radius);
+  padding:1.25rem;
+  border:1px solid rgba(26,92,46,0.08);
+}
+.cic-icon{font-size:1.4rem;margin-bottom:0.5rem;}
+.cic-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.25rem;}
+.cic-value{font-size:0.9rem;font-weight:500;color:var(--dark);}
+
+/* ——— COOKIES TOGGLE ——— */
+.cookie-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 1.25rem;
+  background:white;border-radius:var(--radius);
+  border:1px solid rgba(26,92,46,0.08);
+  margin-bottom:0.75rem;
+}
+.cookie-info{}
+.cookie-name{font-weight:600;font-size:0.95rem;color:var(--dark);}
+.cookie-desc{font-size:0.82rem;color:var(--text-muted);margin-top:2px;}
+.toggle-wrap{flex-shrink:0;margin-left:1rem;}
+.toggle{
+  position:relative;
+  width:46px;height:26px;
+  display:inline-block;
+}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-slider{
+  position:absolute;inset:0;
+  background:var(--cream-dark);
+  border-radius:999px;cursor:pointer;
+  transition:background var(--tr);
+}
+.toggle-slider::before{
+  content:'';position:absolute;
+  width:20px;height:20px;
+  left:3px;top:3px;
+  background:white;border-radius:50%;
+  transition:transform var(--tr);
+  box-shadow:0 1px 4px rgba(0,0,0,0.15);
+}
+.toggle input:checked + .toggle-slider{background:var(--green);}
+.toggle input:checked + .toggle-slider::before{transform:translateX(20px);}
+.toggle input:disabled + .toggle-slider{opacity:0.5;cursor:not-allowed;}
+.cookie-btns{
+  display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap;
+}
+.btn-accept{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--green);color:white;
+  border:none;cursor:pointer;
+  font-family:var(--font-body);font-size:0.9rem;font-weight:600;
+  padding:0.75rem 1.5rem;border-radius:999px;
+  transition:background var(--tr);
+}
+.btn-accept:hover{background:var(--dark);}
+.btn-reject{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:transparent;color:var(--text-muted);
+  border:1.5px solid var(--cream-dark);cursor:pointer;
+  font-family:var(--font-body);font-size:0.9rem;font-weight:500;
+  padding:0.75rem 1.5rem;border-radius:999px;
+  transition:border-color var(--tr),color var(--tr);
+}
+.btn-reject:hover{border-color:var(--text-muted);color:var(--dark);}
+.cookie-banner{
+  background:var(--dark);color:white;
+  border-radius:var(--radius);
+  padding:1.5rem;margin-bottom:2rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+}
+.cookie-banner p{margin:0;font-size:0.88rem;color:rgba(255,255,255,0.75);flex:1;}
+.success-msg{
+  display:none;
+  background:var(--green-pale);color:var(--green);
+  border-radius:var(--radius);padding:1rem 1.25rem;
+  font-size:0.9rem;font-weight:500;margin-top:1rem;
+}
+
+/* ——— RESPONSIVE ——— */
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .content{margin-left:0;padding:2rem 1.25rem 4rem;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-info-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="vitrine_freshcut.html" class="topbar-logo">Fresh<span>Cut</span></a>
+  <span class="topbar-sep">/</span>
+  <span class="topbar-page" id="topbar-label">Pages légales</span>
+  <a href="vitrine_freshcut.html" class="topbar-back">← Retour au site</a>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Informations légales</div>
+    <button class="nav-btn active" onclick="show('mentions')" id="btn-mentions">
+      <span class="nav-icon">📋</span> Mentions légales
+    </button>
+    <button class="nav-btn" onclick="show('confidentialite')" id="btn-confidentialite">
+      <span class="nav-icon">🔒</span> Politique de confidentialité
+    </button>
+    <button class="nav-btn" onclick="show('rgpd')" id="btn-rgpd">
+      <span class="nav-icon">🛡️</span> RGPD &amp; Vos droits
+    </button>
+    <button class="nav-btn" onclick="show('cookies')" id="btn-cookies">
+      <span class="nav-icon">🍪</span> Gestion des cookies
+    </button>
+    <div class="sidebar-label" style="margin-top:1.5rem;">Nous contacter</div>
+    <button class="nav-btn" onclick="show('contact')" id="btn-contact">
+      <span class="nav-icon">✉️</span> Contact
+    </button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- ════════════════════════════════════
+         MENTIONS LÉGALES
+    ════════════════════════════════════ -->
+    <div class="page active" id="page-mentions">
+      <span class="page-eyebrow">Informations légales</span>
+      <h1 class="page-title">Mentions <em>légales</em></h1>
+      <p class="page-date">Dernière mise à jour : <strong>1er janvier 2025</strong></p>
+
+      <h2 class="sec">1. Éditeur du site</h2>
+      <p>Le site <strong>FreshCut</strong> (accessible à l'adresse <em>www.freshcut.fr</em>) est édité par :</p>
+      <ul class="legal">
+        <li><strong>Raison sociale :</strong> FreshCut SAS</li>
+        <li><strong>Capital social :</strong> 10 000 €</li>
+        <li><strong>Siège social :</strong> 12 rue de la République, 75011 Paris, France</li>
+        <li><strong>SIRET :</strong> 000 000 000 00000 (à compléter)</li>
+        <li><strong>RCS :</strong> Paris B 000 000 000</li>
+        <li><strong>N° TVA intracommunautaire :</strong> FR00 000000000</li>
+        <li><strong>Directeur de la publication :</strong> [Nom du représentant légal]</li>
+        <li><strong>Email :</strong> contact@freshcut.fr</li>
+        <li><strong>Téléphone :</strong> +33 (0)1 00 00 00 00</li>
+      </ul>
+
+      <h2 class="sec">2. Hébergeur</h2>
+      <ul class="legal">
+        <li><strong>Hébergeur :</strong> [Nom de l'hébergeur]</li>
+        <li><strong>Adresse :</strong> [Adresse de l'hébergeur]</li>
+        <li><strong>Téléphone :</strong> [Téléphone de l'hébergeur]</li>
+      </ul>
+
+      <h2 class="sec">3. Propriété intellectuelle</h2>
+      <p>L'ensemble du contenu du site FreshCut (textes, images, logos, graphismes, interface, code source) est protégé par le droit de la propriété intellectuelle et est la propriété exclusive de FreshCut SAS, sauf mention contraire expresse.</p>
+      <p>Toute reproduction, distribution, modification, adaptation, retransmission ou publication de ces éléments, même partielle, est strictement interdite sans l'accord exprès et écrit de FreshCut SAS.</p>
+
+      <h2 class="sec">4. Responsabilité</h2>
+      <p>FreshCut SAS s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, FreshCut SAS ne peut garantir l'exactitude, la complétude ou l'actualité des informations diffusées sur ce site et décline toute responsabilité pour les éventuelles inexactitudes.</p>
+
+      <h2 class="sec">5. Liens hypertextes</h2>
+      <p>Le site peut contenir des liens vers d'autres sites web. FreshCut SAS n'est pas responsable du contenu de ces sites externes et ne saurait être tenu responsable des préjudices directs ou indirects résultant de l'accès à ces sites.</p>
+
+      <h2 class="sec">6. Droit applicable et juridiction</h2>
+      <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, et après tentative de résolution amiable, les tribunaux français seront seuls compétents.</p>
+
+      <h2 class="sec">7. Médiation</h2>
+      <p>Conformément à l'article L.616-1 du Code de la consommation, FreshCut propose un dispositif de médiation de la consommation. En cas de litige non résolu, vous pouvez recourir gratuitement au médiateur de la consommation : <strong>Médiateur de la consommation agréé</strong>, dont les coordonnées sont disponibles sur simple demande à contact@freshcut.fr.</p>
+    </div>
+
+    <!-- ════════════════════════════════════
+         POLITIQUE DE CONFIDENTIALITÉ
+    ════════════════════════════════════ -->
+    <div class="page" id="page-confidentialite">
+      <span class="page-eyebrow">Vos données personnelles</span>
+      <h1 class="page-title">Politique de <em>confidentialité</em></h1>
+      <p class="page-date">Dernière mise à jour : <strong>1er janvier 2025</strong> — Conforme au RGPD (Règlement UE 2016/679)</p>
+
+      <div class="info-box">
+        <p>🌿 FreshCut s'engage à protéger votre vie privée. Nous ne vendons jamais vos données personnelles à des tiers et nous ne les utilisons que pour vous fournir nos services de click &amp; collect.</p>
+      </div>
+
+      <h2 class="sec">1. Responsable du traitement</h2>
+      <p><strong>FreshCut SAS</strong>, 12 rue de la République, 75011 Paris — contact@freshcut.fr</p>
+
+      <h2 class="sec">2. Données collectées</h2>
+      <h3 class="subsec">2.1 En tant qu'invité</h3>
+      <ul class="legal">
+        <li>Nom et prénom</li>
+        <li>Adresse e-mail</li>
+        <li>Numéro de téléphone (optionnel)</li>
+        <li>Détails de la commande</li>
+      </ul>
+      <h3 class="subsec">2.2 En tant que client inscrit</h3>
+      <ul class="legal">
+        <li>Toutes les données ci-dessus</li>
+        <li>Historique complet des commandes</li>
+        <li>Préférences et abonnements récurrents</li>
+        <li>Données de connexion (date, heure, IP)</li>
+      </ul>
+      <h3 class="subsec">2.3 Données de paiement</h3>
+      <p>Les données bancaires sont traitées exclusivement par nos prestataires de paiement certifiés PCI-DSS (<strong>Stripe</strong> et <strong>PayPal</strong>). FreshCut ne stocke jamais vos coordonnées bancaires.</p>
+
+      <h2 class="sec">3. Finalités et bases légales</h2>
+      <table class="legal-table">
+        <thead>
+          <tr><th>Finalité</th><th>Base légale</th><th>Durée de conservation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Traitement des commandes</td><td>Exécution du contrat</td><td>5 ans (obligations comptables)</td></tr>
+          <tr><td>Gestion du compte client</td><td>Exécution du contrat</td><td>3 ans après dernière activité</td></tr>
+          <tr><td>Envoi d'e-mails transactionnels</td><td>Exécution du contrat</td><td>Durée du compte</td></tr>
+          <tr><td>Envoi d'e-mails marketing</td><td>Consentement</td><td>Jusqu'au retrait du consentement</td></tr>
+          <tr><td>Analyses statistiques anonymisées</td><td>Intérêt légitime</td><td>26 mois maximum</td></tr>
+          <tr><td>Prévention de la fraude</td><td>Intérêt légitime</td><td>1 an</td></tr>
+          <tr><td>Obligations légales et comptables</td><td>Obligation légale</td><td>10 ans</td></tr>
+        </tbody>
+      </table>
+
+      <h2 class="sec">4. Destinataires des données</h2>
+      <p>Vos données peuvent être partagées avec :</p>
+      <ul class="legal">
+        <li>Les gérants de la boutique sélectionnée (traitement de votre commande uniquement)</li>
+        <li>Stripe Inc. et PayPal Holdings Inc. (paiement sécurisé)</li>
+        <li>Notre prestataire d'envoi d'e-mails (notifications de commande)</li>
+        <li>Les autorités compétentes sur réquisition légale</li>
+      </ul>
+      <p>Aucune donnée n'est vendue ou louée à des tiers à des fins commerciales.</p>
+
+      <h2 class="sec">5. Transferts hors UE</h2>
+      <p>Stripe et PayPal peuvent traiter des données aux États-Unis. Ces transferts sont encadrés par des clauses contractuelles types approuvées par la Commission européenne, garantissant un niveau de protection adéquat.</p>
+
+      <h2 class="sec">6. Sécurité</h2>
+      <p>FreshCut met en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données : chiffrement SSL/TLS, accès restreint par rôle, journalisation des accès, sauvegardes régulières chiffrées.</p>
+
+      <h2 class="sec">7. Vos droits</h2>
+      <p>Conformément au RGPD, vous disposez des droits suivants (voir section RGPD pour le détail) :</p>
+      <ul class="legal">
+        <li>Droit d'accès, de rectification, d'effacement</li>
+        <li>Droit à la portabilité et à la limitation du traitement</li>
+        <li>Droit d'opposition et retrait du consentement</li>
+        <li>Droit de définir des directives post-mortem</li>
+      </ul>
+      <p>Pour exercer vos droits : <strong>privacy@freshcut.fr</strong> ou via le formulaire de contact.</p>
+
+      <h2 class="sec">8. Réclamation</h2>
+      <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) — <em>www.cnil.fr</em> — 3 place de Fontenoy, 75007 Paris.</p>
+    </div>
+
+    <!-- ════════════════════════════════════
+         RGPD
+    ════════════════════════════════════ -->
+    <div class="page" id="page-rgpd">
+      <span class="page-eyebrow">Règlement Général sur la Protection des Données</span>
+      <h1 class="page-title">RGPD &amp; <em>Vos droits</em></h1>
+      <p class="page-date">Dernière mise à jour : <strong>1er janvier 2025</strong> — Règlement (UE) 2016/679 du 27 avril 2016</p>
+
+      <div class="info-box">
+        <p>🛡️ FreshCut a désigné un <strong>délégué à la protection des données (DPO)</strong>. Pour toute question relative à vos données personnelles, contactez-le à : <strong>dpo@freshcut.fr</strong></p>
+      </div>
+
+      <h2 class="sec">1. Vos droits en détail</h2>
+
+      <h3 class="subsec">Droit d'accès (Art. 15 RGPD)</h3>
+      <p>Vous avez le droit d'obtenir la confirmation que des données vous concernant sont traitées, et d'en obtenir une copie. Délai de réponse : <strong>1 mois</strong> maximum.</p>
+
+      <h3 class="subsec">Droit de rectification (Art. 16 RGPD)</h3>
+      <p>Vous pouvez exiger la correction de données inexactes ou incomplètes vous concernant. Vous pouvez également le faire directement depuis votre espace client.</p>
+
+      <h3 class="subsec">Droit à l'effacement — « Droit à l'oubli » (Art. 17 RGPD)</h3>
+      <p>Vous pouvez demander la suppression de vos données dans les cas suivants :</p>
+      <ul class="legal">
+        <li>Les données ne sont plus nécessaires au regard des finalités pour lesquelles elles ont été collectées</li>
+        <li>Vous retirez votre consentement et il n'existe pas d'autre base légale</li>
+        <li>Vous vous opposez au traitement et il n'existe pas de motif légitime impérieux</li>
+        <li>Les données ont fait l'objet d'un traitement illicite</li>
+      </ul>
+      <div class="warn-box">
+        <p>⚠️ Ce droit ne s'applique pas lorsque le traitement est nécessaire au respect d'une obligation légale (conservation comptable 10 ans) ou à la constatation, l'exercice ou la défense de droits en justice.</p>
+      </div>
+
+      <h3 class="subsec">Droit à la limitation du traitement (Art. 18 RGPD)</h3>
+      <p>Vous pouvez demander la limitation du traitement de vos données dans certaines circonstances (contestation de l'exactitude, traitement illicite, données nécessaires pour un recours juridique, opposition en cours).</p>
+
+      <h3 class="subsec">Droit à la portabilité (Art. 20 RGPD)</h3>
+      <p>Vous avez le droit de recevoir vos données dans un format structuré, couramment utilisé et lisible par machine (JSON ou CSV), et de les transmettre à un autre responsable du traitement.</p>
+
+      <h3 class="subsec">Droit d'opposition (Art. 21 RGPD)</h3>
+      <p>Vous pouvez vous opposer à tout moment au traitement de vos données à des fins de prospection commerciale ou basé sur notre intérêt légitime. En cas d'opposition, FreshCut cesse ce traitement, sauf motif légitime impérieux.</p>
+
+      <h3 class="subsec">Droit de retrait du consentement</h3>
+      <p>Lorsque le traitement est basé sur votre consentement (ex. : newsletters marketing), vous pouvez le retirer à tout moment, sans justification, via votre compte ou par e-mail à privacy@freshcut.fr.</p>
+
+      <h3 class="subsec">Directives relatives au sort de vos données après votre décès</h3>
+      <p>Conformément à la loi Informatique et Libertés, vous pouvez définir des directives concernant la conservation, l'effacement et la communication de vos données après votre décès.</p>
+
+      <h2 class="sec">2. Comment exercer vos droits</h2>
+      <table class="legal-table">
+        <thead>
+          <tr><th>Canal</th><th>Coordonnées</th><th>Délai indicatif</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>E-mail</td><td>privacy@freshcut.fr</td><td>30 jours maximum</td></tr>
+          <tr><td>Courrier recommandé</td><td>FreshCut SAS — DPO, 12 rue de la République, 75011 Paris</td><td>30 jours maximum</td></tr>
+          <tr><td>Espace client</td><td>Paramètres → Confidentialité</td><td>Immédiat (rectification, export)</td></tr>
+        </tbody>
+      </table>
+      <p>Une pièce d'identité pourra être demandée pour confirmer votre identité avant de traiter la demande.</p>
+
+      <h2 class="sec">3. Base légale des traitements</h2>
+      <p>FreshCut traite vos données sur les bases légales suivantes :</p>
+      <ul class="legal">
+        <li><span class="tag">Contrat</span> Traitement de vos commandes et gestion de votre compte</li>
+        <li><span class="tag">Consentement</span> Envoi de newsletters et communications marketing</li>
+        <li><span class="tag">Intérêt légitime</span> Prévention de la fraude, amélioration de nos services, statistiques anonymisées</li>
+        <li><span class="tag warn">Obligation légale</span> Conservation des données comptables et fiscales</li>
+      </ul>
+
+      <h2 class="sec">4. Registre des traitements (résumé)</h2>
+      <p>Conformément à l'article 30 du RGPD, FreshCut tient un registre interne de tous ses traitements. Le résumé public est disponible sur demande à dpo@freshcut.fr.</p>
+
+      <h2 class="sec">5. Violations de données</h2>
+      <p>En cas de violation de données susceptible d'engendrer un risque élevé pour vos droits et libertés, FreshCut s'engage à vous en informer dans les <strong>72 heures</strong> suivant la prise de connaissance de l'incident, conformément à l'article 33 du RGPD.</p>
+
+      <h2 class="sec">6. Contact autorité de contrôle</h2>
+      <p>Vous pouvez également adresser une réclamation à la <strong>CNIL</strong> :</p>
+      <ul class="legal">
+        <li>Site web : www.cnil.fr</li>
+        <li>Adresse : 3 place de Fontenoy — TSA 80715 — 75334 Paris Cedex 07</li>
+        <li>Téléphone : 01 53 73 22 22</li>
+      </ul>
+    </div>
+
+    <!-- ════════════════════════════════════
+         COOKIES
+    ════════════════════════════════════ -->
+    <div class="page" id="page-cookies">
+      <span class="page-eyebrow">Transparence &amp; contrôle</span>
+      <h1 class="page-title">Gestion des <em>cookies</em></h1>
+      <p class="page-date">Dernière mise à jour : <strong>1er janvier 2025</strong> — Conforme aux recommandations CNIL</p>
+
+      <div class="cookie-banner">
+        <p>🍪 Personnalisez ici vos préférences de cookies. Vos choix sont sauvegardés et applicables immédiatement. Vous pouvez les modifier à tout moment.</p>
+        <div class="cookie-btns" style="margin:0;flex-wrap:nowrap;">
+          <button class="btn-accept" onclick="acceptAll()">Tout accepter</button>
+          <button class="btn-reject" onclick="rejectAll()">Tout refuser</button>
+        </div>
+      </div>
+
+      <h2 class="sec">1. Qu'est-ce qu'un cookie ?</h2>
+      <p>Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, smartphone, tablette) lors de votre visite sur FreshCut. Il permet de mémoriser des informations relatives à votre navigation et d'améliorer votre expérience.</p>
+
+      <h2 class="sec">2. Cookies strictement nécessaires</h2>
+      <p>Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas être désactivés. Ils ne collectent aucune information permettant de vous identifier à des fins marketing.</p>
+
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">session_id — Session utilisateur</div>
+          <div class="cookie-desc">Maintient votre panier et votre session de connexion. Durée : session (supprimé à la fermeture du navigateur).</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">csrf_token — Sécurité</div>
+          <div class="cookie-desc">Protège contre les attaques CSRF (Cross-Site Request Forgery). Durée : session.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">cookie_consent — Préférences cookies</div>
+          <div class="cookie-desc">Mémorise vos choix en matière de cookies pour éviter de vous redemander. Durée : 13 mois.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <h2 class="sec">3. Cookies de performance &amp; analytics</h2>
+      <p>Ces cookies nous permettent de mesurer l'audience du site et d'améliorer son fonctionnement. Les données sont anonymisées et agrégées.</p>
+
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">_ga, _ga_XXXX — Google Analytics (anonymisé)</div>
+          <div class="cookie-desc">Mesure du trafic et du comportement de navigation. IP anonymisée. Durée : 13 mois.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="toggle-analytics"/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">freshcut_perf — Performance interne</div>
+          <div class="cookie-desc">Temps de chargement, erreurs techniques anonymisées. Durée : 6 mois.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="toggle-perf"/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <h2 class="sec">4. Cookies de paiement (tiers)</h2>
+      <p>Ces cookies sont déposés par nos prestataires de paiement lors du processus de règlement. Ils sont nécessaires à la sécurisation des transactions.</p>
+
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">__stripe_mid, __stripe_sid — Stripe</div>
+          <div class="cookie-desc">Prévention de la fraude et sécurisation du paiement par Stripe. Durée : 1 an / session.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">ts, tsrce — PayPal</div>
+          <div class="cookie-desc">Sécurisation du paiement PayPal, prévention des fraudes. Durée : session.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <h2 class="sec">5. Cookies marketing (optionnels)</h2>
+      <p>Ces cookies permettent d'afficher des publicités personnalisées et de mesurer leur efficacité. Ils ne sont activés qu'avec votre consentement explicite.</p>
+
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">fbp — Meta Pixel</div>
+          <div class="cookie-desc">Suivi des conversions et remarketing via Meta (Facebook / Instagram). Durée : 90 jours.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="toggle-meta"/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-info">
+          <div class="cookie-name">_gcl_au — Google Ads</div>
+          <div class="cookie-desc">Mesure des conversions Google Ads. Durée : 90 jours.</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="toggle-gads"/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="cookie-btns">
+        <button class="btn-accept" onclick="savePrefs()">💾 Enregistrer mes préférences</button>
+        <button class="btn-reject" onclick="rejectAll()">Tout refuser</button>
+        <button class="btn-accept" style="background:var(--orange);" onclick="acceptAll()">Tout accepter</button>
+      </div>
+      <div class="success-msg" id="save-ok">✅ Vos préférences ont bien été enregistrées. Merci !</div>
+
+      <h2 class="sec">6. Comment supprimer les cookies ?</h2>
+      <p>Vous pouvez supprimer ou bloquer les cookies directement depuis votre navigateur :</p>
+      <ul class="legal">
+        <li><strong>Chrome :</strong> Paramètres → Confidentialité et sécurité → Cookies</li>
+        <li><strong>Firefox :</strong> Options → Vie privée et sécurité → Cookies</li>
+        <li><strong>Safari :</strong> Préférences → Confidentialité → Cookies</li>
+        <li><strong>Edge :</strong> Paramètres → Cookies et autorisations de site</li>
+      </ul>
+      <p>Attention : désactiver tous les cookies peut affecter le bon fonctionnement du site FreshCut.</p>
+    </div>
+
+    <!-- ════════════════════════════════════
+         CONTACT
+    ════════════════════════════════════ -->
+    <div class="page" id="page-contact">
+      <span class="page-eyebrow">Parlons-nous</span>
+      <h1 class="page-title">Nous <em>contacter</em></h1>
+      <p class="page-date">Notre équipe répond sous <strong>24 à 48h ouvrées</strong>. Pour les urgences commande, contactez directement votre boutique.</p>
+
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="cic-icon">📧</div>
+          <div class="cic-label">E-mail général</div>
+          <div class="cic-value">contact@freshcut.fr</div>
+        </div>
+        <div class="contact-info-card">
+          <div class="cic-icon">🛡️</div>
+          <div class="cic-label">DPO / Données personnelles</div>
+          <div class="cic-value">privacy@freshcut.fr</div>
+        </div>
+        <div class="contact-info-card">
+          <div class="cic-icon">📍</div>
+          <div class="cic-label">Siège social</div>
+          <div class="cic-value">12 rue de la République, 75011 Paris</div>
+        </div>
+        <div class="contact-info-card">
+          <div class="cic-icon">🕐</div>
+          <div class="cic-label">Horaires support</div>
+          <div class="cic-value">Lun–Ven, 9h–18h</div>
+        </div>
+      </div>
+
+      <h2 class="sec">Formulaire de contact</h2>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom *</label>
+            <input class="form-input" type="text" placeholder="Votre prénom"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom *</label>
+            <input class="form-input" type="text" placeholder="Votre nom"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adresse e-mail *</label>
+          <input class="form-input" type="email" placeholder="vous@exemple.fr"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Objet de votre demande *</label>
+          <select class="form-select">
+            <option value="">— Sélectionnez un objet —</option>
+            <option>Question sur une commande</option>
+            <option>Problème avec l'application</option>
+            <option>Exercice de mes droits RGPD</option>
+            <option>Partenariat / Presse</option>
+            <option>Candidature gérant de boutique</option>
+            <option>Signalement d'un bug</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Numéro de commande (si applicable)</label>
+          <input class="form-input" type="text" placeholder="ex. FC-2025-0042"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Votre message *</label>
+          <textarea class="form-textarea" placeholder="Décrivez votre demande en détail…"></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.85rem;color:var(--text-muted);font-weight:300;">
+            <input type="checkbox" style="margin-top:2px;accent-color:var(--green);flex-shrink:0;"/>
+            J'ai lu et j'accepte la <a href="#" onclick="show('confidentialite');return false;" style="color:var(--green);text-decoration:underline;margin:0 4px;">politique de confidentialité</a> de FreshCut. Mes données seront utilisées uniquement pour traiter ma demande. *
+          </label>
+        </div>
+        <button class="btn-submit" onclick="submitForm()">
+          ✉️ Envoyer ma demande
+        </button>
+        <div class="success-msg" id="contact-ok">🎉 Message envoyé ! Nous vous répondrons sous 24 à 48h ouvrées.</div>
+      </div>
+
+      <h2 class="sec" style="margin-top:3rem;">FAQ rapide</h2>
+      <div id="faq" style="display:flex;flex-direction:column;gap:0.6rem;margin-top:1rem;">
+        <div class="cookie-row" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div class="cookie-info">
+            <div class="cookie-name">Comment annuler une commande ?</div>
+            <div class="faq-answer" style="display:none;font-size:0.88rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Connectez-vous à votre espace client → Mes commandes → Annuler. L'annulation est possible jusqu'à 30 minutes avant l'heure de retrait prévue. Au-delà, contactez directement la boutique.</div>
+          </div>
+          <span style="font-size:1.2rem;color:var(--text-muted);flex-shrink:0;">+</span>
+        </div>
+        <div class="cookie-row" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div class="cookie-info">
+            <div class="cookie-name">Comment modifier mon abonnement récurrent ?</div>
+            <div class="faq-answer" style="display:none;font-size:0.88rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Depuis votre espace client → Mes abonnements. Vous pouvez modifier la fréquence, les produits, ou annuler à tout moment sans frais ni préavis.</div>
+          </div>
+          <span style="font-size:1.2rem;color:var(--text-muted);flex-shrink:0;">+</span>
+        </div>
+        <div class="cookie-row" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div class="cookie-info">
+            <div class="cookie-name">Comment exercer mon droit à l'oubli ?</div>
+            <div class="faq-answer" style="display:none;font-size:0.88rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Envoyez un e-mail à privacy@freshcut.fr avec l'objet "Demande d'effacement". Nous traiterons votre demande sous 30 jours et vous confirmerons la suppression de vos données.</div>
+          </div>
+          <span style="font-size:1.2rem;color:var(--text-muted);flex-shrink:0;">+</span>
+        </div>
+        <div class="cookie-row" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div class="cookie-info">
+            <div class="cookie-name">Je n'ai pas reçu ma confirmation de commande</div>
+            <div class="faq-answer" style="display:none;font-size:0.88rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Vérifiez vos spams. Si rien n'apparaît, contactez-nous avec votre e-mail de commande et nous vous renverrons la confirmation manuellement.</div>
+          </div>
+          <span style="font-size:1.2rem;color:var(--text-muted);flex-shrink:0;">+</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const pages = ['mentions','confidentialite','rgpd','cookies','contact'];
+const labels = {
+  mentions:'Mentions légales',
+  confidentialite:'Politique de confidentialité',
+  rgpd:'RGPD & Vos droits',
+  cookies:'Gestion des cookies',
+  contact:'Contact'
+};
+
+function show(id){
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.toggle('active', p===id);
+    document.getElementById('btn-'+p).classList.toggle('active', p===id);
+  });
+  document.getElementById('topbar-label').textContent = labels[id];
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function acceptAll(){
+  ['analytics','perf','meta','gads'].forEach(id=>{
+    const el = document.getElementById('toggle-'+id);
+    if(el) el.checked = true;
+  });
+  showSave();
+}
+function rejectAll(){
+  ['analytics','perf','meta','gads'].forEach(id=>{
+    const el = document.getElementById('toggle-'+id);
+    if(el) el.checked = false;
+  });
+  showSave();
+}
+function savePrefs(){showSave();}
+function showSave(){
+  const el = document.getElementById('save-ok');
+  if(el){el.style.display='block';setTimeout(()=>el.style.display='none',4000);}
+}
+function submitForm(){
+  const el = document.getElementById('contact-ok');
+  if(el){el.style.display='block';setTimeout(()=>el.style.display='none',5000);}
+}
+function toggleFaq(row){
+  const ans = row.querySelector('.faq-answer');
+  const icon = row.querySelector('span');
+  const open = ans.style.display==='block';
+  ans.style.display = open ? 'none' : 'block';
+  icon.textContent = open ? '+' : '−';
+}
+
+// hash routing
+const hash = location.hash.replace('#','');
+if(pages.includes(hash)) show(hash);
+</script>
+</body>
+</html>
