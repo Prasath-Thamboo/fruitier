@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FreshCut — Click & Collect Fruits & Smoothies</title>
+<title>LeFruitier — Click & Collect Fruits & Smoothies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -587,17 +587,11 @@
   .role-card:hover { transform: translateY(-4px); }
   .role-card.guest { background: var(--cream-dark); border: 1px solid var(--cream-dark); }
   .role-card.client { background: var(--green-pale); border: 1px solid rgba(45,138,78,0.2); }
-  .role-card.manager { background: rgba(232,96,44,0.08); border: 1px solid rgba(232,96,44,0.15); }
-  .role-card.admin { background: var(--dark); color: white; }
-
   .role-icon { font-size: 2.2rem; margin-bottom: 1rem; }
   .role-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
-  .role-card.admin .role-name { color: white; }
   .role-perks { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
   .role-perks li { font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); }
-  .role-card.admin .role-perks li { color: rgba(255,255,255,0.65); }
   .role-perks li::before { content: '✓'; font-weight: 700; color: var(--green); flex-shrink: 0; }
-  .role-card.admin .role-perks li::before { color: var(--green-light); }
 
   /* ——— PAYMENT ——— */
   .payment-section {
@@ -708,6 +702,65 @@
     margin-top: 0.5rem;
   }
 
+  /* ——— COOKIE BANNER ——— */
+  .cookie-banner {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: min(680px, calc(100vw - 2rem));
+    background: var(--dark);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 1.4rem 1.8rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .cookie-banner.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+  }
+  .cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .cookie-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    flex: 1;
+    min-width: 200px;
+  }
+  .cookie-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+  .cookie-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; color: white; }
+  .cookie-text p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; margin: 0; }
+  .cookie-actions { display: flex; gap: 0.7rem; flex-shrink: 0; }
+  .cookie-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-pill);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .cookie-btn:hover { transform: translateY(-1px); }
+  .cookie-btn-decline {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+  }
+  .cookie-btn-decline:hover { background: rgba(255,255,255,0.18); }
+  .cookie-btn-accept {
+    background: var(--green-light);
+    color: var(--dark);
+  }
+  .cookie-btn-accept:hover { background: var(--green-mid); color: white; }
+
   /* ——— ANIMATIONS ——— */
   .fade-in {
     opacity: 0;
@@ -735,7 +788,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Fresh<span>Cut</span></a>
+  <a href="#" class="nav-logo">Le<span>Fruitier</span></a>
   <ul class="nav-links">
     <li><a href="#how">Comment ça marche</a></li>
     <li><a href="#products">Produits</a></li>
@@ -770,7 +823,7 @@
     <div class="hero-phone-wrap">
       <div class="hero-phone">
         <div class="phone-screen">
-          <div class="phone-statusbar">FreshCut</div>
+          <div class="phone-statusbar">LeFruitier</div>
           <div class="phone-header">
             <div class="phone-header-title">Bonjour 👋</div>
             <div class="phone-store-selector">
@@ -855,7 +908,7 @@
       <div class="step-num">01</div>
       <div class="step-icon">📍</div>
       <div class="step-title">Choisissez votre boutique</div>
-      <p class="step-desc">Sélectionnez le magasin FreshCut le plus proche ou le plus pratique. Chaque boutique a son propre catalogue mis à jour en temps réel.</p>
+      <p class="step-desc">Sélectionnez le magasin LeFruitier le plus proche ou le plus pratique. Chaque boutique a son propre catalogue mis à jour en temps réel.</p>
     </div>
     <div class="how-step fade-in">
       <div class="step-num">02</div>
@@ -898,7 +951,7 @@
     <div class="product-card smoothies fade-in">
       <div class="product-emoji">🥤</div>
       <div class="product-name">Smoothies</div>
-      <p class="product-desc">Mixés à la commande, sans conservateurs. Formules classiques ou créations saisonnières par vos gérants.</p>
+      <p class="product-desc">Mixés à la commande, sans conservateurs. Formules classiques ou créations saisonnières selon les saisons.</p>
       <div class="product-tags">
         <span class="product-tag">Mixé minute</span>
         <span class="product-tag">Personnalisable</span>
@@ -934,7 +987,7 @@
     <div>
       <div class="section-tag">Fonctionnalités</div>
       <h2 class="section-title">Un outil pensé<br><em>pour tout le monde</em></h2>
-      <p class="section-sub">Que vous soyez client, gérant de boutique ou administrateur — chaque rôle dispose d'un espace taillé sur mesure.</p>
+      <p class="section-sub">Que vous soyez visiteur ou client fidèle — chaque utilisateur dispose d'un espace taillé sur mesure.</p>
       <div class="features-list">
         <div class="feature-item fade-in">
           <div class="feature-icon">📱</div>
@@ -951,13 +1004,6 @@
           </div>
         </div>
         <div class="feature-item fade-in">
-          <div class="feature-icon">🧑‍💼</div>
-          <div>
-            <div class="feature-title">Dashboard gérant par boutique</div>
-            <p class="feature-desc">Chaque manager gère son propre catalogue, ses promos et ses commandes en temps réel. Gestion indépendante, vue centralisée pour l'admin.</p>
-          </div>
-        </div>
-        <div class="feature-item fade-in">
           <div class="feature-icon">🔒</div>
           <div>
             <div class="feature-title">Conforme RGPD</div>
@@ -967,51 +1013,51 @@
       </div>
     </div>
 
-    <!-- Dashboard mockup -->
+    <!-- Order history mockup -->
     <div class="features-visual fade-in">
-      <div class="dash-title">📊 Dashboard Gérant — Boutique République</div>
+      <div class="dash-title">🧾 Mes commandes</div>
       <div class="dash-stat-row">
         <div class="dash-stat">
           <div class="dash-stat-label">Commandes</div>
-          <div class="dash-stat-value">24</div>
+          <div class="dash-stat-value">12</div>
         </div>
         <div class="dash-stat">
-          <div class="dash-stat-label">CA aujourd'hui</div>
-          <div class="dash-stat-value">186€</div>
+          <div class="dash-stat-label">Économisé</div>
+          <div class="dash-stat-value">8€</div>
         </div>
         <div class="dash-stat">
-          <div class="dash-stat-label">En attente</div>
-          <div class="dash-stat-value" style="color: var(--orange);">5</div>
+          <div class="dash-stat-label">Abonnement</div>
+          <div class="dash-stat-value" style="color: var(--green-mid); font-size: 1.1rem;">Actif ✓</div>
         </div>
       </div>
       <div class="dash-orders">
         <div class="dash-order ready">
           <div>
-            <div class="order-name">Marie D. — Box Mango</div>
-            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 12h30</div>
+            <div class="order-name">Box Mango + Smoothie</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Aujourd'hui 12h30 — Boutique République</div>
           </div>
           <span class="order-badge badge-ready">Prêt ✓</span>
-        </div>
-        <div class="dash-order pending">
-          <div>
-            <div class="order-name">Lucas M. — Jus orange ×2</div>
-            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 13h00</div>
-          </div>
-          <span class="order-badge badge-pending">À préparer</span>
         </div>
         <div class="dash-order preparing">
           <div>
-            <div class="order-name">Sophie K. — Smoothie Fraise</div>
-            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 13h15</div>
+            <div class="order-name">Jus orange ×2</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Hier 13h00 — Boutique Nation</div>
           </div>
-          <span class="order-badge badge-prep">En cours…</span>
+          <span class="order-badge badge-prep">Livré</span>
         </div>
         <div class="dash-order ready">
           <div>
-            <div class="order-name">Ahmed T. — Fruits Rouges 250g</div>
-            <div style="font-size:0.78rem; color: var(--text-muted);">Retrait 12h00</div>
+            <div class="order-name">Fruits Rouges 250g</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Lundi 12h00 — Boutique République</div>
           </div>
-          <span class="order-badge badge-ready">Prêt ✓</span>
+          <span class="order-badge badge-ready">Livré ✓</span>
+        </div>
+        <div class="dash-order pending">
+          <div>
+            <div class="order-name">Abonnement hebdo — Box Équilibre</div>
+            <div style="font-size:0.78rem; color: var(--text-muted);">Prochain retrait vendredi 12h30</div>
+          </div>
+          <span class="order-badge badge-pending">Planifié</span>
         </div>
       </div>
     </div>
@@ -1021,8 +1067,8 @@
 <!-- ROLES -->
 <section style="padding-top: 2rem;">
   <div class="section-tag">Accès &amp; Rôles</div>
-  <h2 class="section-title" style="margin-bottom: 0.8rem;">4 profils, <em>une expérience fluide</em></h2>
-  <p class="section-sub">Chaque utilisateur trouve son espace, ses droits, ses outils.</p>
+  <h2 class="section-title" style="margin-bottom: 0.8rem;">2 façons de commander, <em>une expérience fluide</em></h2>
+  <p class="section-sub">Commandez en quelques secondes, avec ou sans compte.</p>
 
   <div class="roles-grid">
     <div class="role-card guest fade-in">
@@ -1042,28 +1088,6 @@
         <li>Abonnements récurrents annulables</li>
         <li>Notifications de suivi en temps réel</li>
         <li>Profil &amp; préférences sauvegardés</li>
-      </ul>
-    </div>
-    <div class="role-card manager fade-in">
-      <div class="role-icon">🧑‍🍳</div>
-      <div class="role-name">Manager</div>
-      <ul class="role-perks">
-        <li>Gestion de sa boutique uniquement</li>
-        <li>Ajout / modif / suppression produits</li>
-        <li>Accepter, refuser, marquer prêt</li>
-        <li>Créer des promotions</li>
-        <li>Suivi historique de sa boutique</li>
-      </ul>
-    </div>
-    <div class="role-card admin fade-in">
-      <div class="role-icon">🛡️</div>
-      <div class="role-name">Administrateur</div>
-      <ul class="role-perks">
-        <li>Vue globale de toutes les boutiques</li>
-        <li>Accès à tous les comptes et données</li>
-        <li>Suivi des commandes depuis le début</li>
-        <li>Tableau de bord multi-boutiques</li>
-        <li>Gestion complète des utilisateurs</li>
       </ul>
     </div>
   </div>
@@ -1091,16 +1115,33 @@
 <section id="contact" class="cta-section">
   <div class="section-tag" style="color: var(--orange-light);">Bientôt disponible</div>
   <h2 class="section-title">Prêt à commander<br><em style="color: var(--green-light);">du frais</em> ?</h2>
-  <p class="section-sub">L'application FreshCut arrive bientôt sur iOS et Android. Inscrivez-vous pour être parmi les premiers à y accéder.</p>
+  <p class="section-sub">L'application LeFruitier arrive bientôt sur iOS et Android. Inscrivez-vous pour être parmi les premiers à y accéder.</p>
   <div class="cta-btns">
     <a href="#" class="btn-white">📱 Rejoindre la liste d'attente</a>
     <a href="#" class="btn-ghost">En savoir plus →</a>
   </div>
 </section>
 
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentement aux cookies" aria-live="polite">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      <span class="cookie-icon">🍪</span>
+      <div>
+        <strong>Nous utilisons des cookies</strong>
+        <p>Pour améliorer votre expérience, analyser le trafic et personnaliser le contenu. Vous pouvez choisir d'accepter ou de refuser les cookies non essentiels.</p>
+      </div>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Refuser</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accepter</button>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">Fresh<span>Cut</span></a>
+  <a href="#" class="footer-logo">Le<span>Fruitier</span></a>
   <ul class="footer-links">
     <li><a href="freshcut_legal.html">Mentions légales</a></li>
     <li><a href="freshcut_legal.html">Politique de confidentialité</a></li>
@@ -1109,7 +1150,7 @@
     <li><a href="freshcut_legal.html">Contact</a></li>
   </ul>
   <div class="footer-copy">
-    © 2025 FreshCut — Tous droits réservés. Application de Click &amp; Collect de fruits frais découpés, smoothies et jus pressés.
+    © 2025 LeFruitier — Tous droits réservés. Application de Click &amp; Collect de fruits frais découpés, smoothies et jus pressés.
   </div>
 </footer>
 
@@ -1126,6 +1167,20 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Cookie banner
+  const cookieBanner = document.getElementById('cookie-banner');
+  if (localStorage.getItem('cookie_consent')) {
+    cookieBanner.classList.add('hidden');
+  }
+  document.getElementById('cookie-accept').addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'accepted');
+    cookieBanner.classList.add('hidden');
+  });
+  document.getElementById('cookie-decline').addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'declined');
+    cookieBanner.classList.add('hidden');
+  });
 
   // Nav scroll effect
   window.addEventListener('scroll', () => {
