@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FreshCut — Pages Légales</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<title>LeFruitier — Mentions légales, RGPD &amp; Cookies</title>
+<meta name="description" content="Mentions légales, politique de confidentialité, RGPD et gestion des cookies de LeFruitier — application Click &amp; Collect de fruits frais à Paris."/>
+<meta name="robots" content="noindex, follow"/>
+<link rel="canonical" href="https://www.lefruitier.fr/freshcut_legal.html"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -364,7 +367,7 @@ table.legal-table tr:nth-child(even) td{background:rgba(212,240,222,0.25);}
 <body>
 
 <div class="topbar">
-  <a href="vitrine_freshcut.html" class="topbar-logo">Fresh<span>Cut</span></a>
+  <a href="vitrine_freshcut.html" class="topbar-logo">Le<span>Fruitier</span></a>
   <span class="topbar-sep">/</span>
   <span class="topbar-page" id="topbar-label">Pages légales</span>
   <a href="vitrine_freshcut.html" class="topbar-back">← Retour au site</a>
@@ -775,21 +778,21 @@ table.legal-table tr:nth-child(even) td{background:rgba(212,240,222,0.25);}
       <div class="contact-form">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Prénom *</label>
-            <input class="form-input" type="text" placeholder="Votre prénom"/>
+            <label class="form-label" for="contact-prenom">Prénom *</label>
+            <input class="form-input" type="text" id="contact-prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name"/>
           </div>
           <div class="form-group">
-            <label class="form-label">Nom *</label>
-            <input class="form-input" type="text" placeholder="Votre nom"/>
+            <label class="form-label" for="contact-nom">Nom *</label>
+            <input class="form-input" type="text" id="contact-nom" name="nom" placeholder="Votre nom" autocomplete="family-name"/>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Adresse e-mail *</label>
-          <input class="form-input" type="email" placeholder="vous@exemple.fr"/>
+          <label class="form-label" for="contact-email">Adresse e-mail *</label>
+          <input class="form-input" type="email" id="contact-email" name="email" placeholder="vous@exemple.fr" autocomplete="email"/>
         </div>
         <div class="form-group">
-          <label class="form-label">Objet de votre demande *</label>
-          <select class="form-select">
+          <label class="form-label" for="contact-objet">Objet de votre demande *</label>
+          <select class="form-select" id="contact-objet" name="objet">
             <option value="">— Sélectionnez un objet —</option>
             <option>Question sur une commande</option>
             <option>Problème avec l'application</option>
@@ -801,17 +804,17 @@ table.legal-table tr:nth-child(even) td{background:rgba(212,240,222,0.25);}
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Numéro de commande (si applicable)</label>
-          <input class="form-input" type="text" placeholder="ex. FC-2025-0042"/>
+          <label class="form-label" for="contact-commande">Numéro de commande (si applicable)</label>
+          <input class="form-input" type="text" id="contact-commande" name="commande" placeholder="ex. FC-2025-0042"/>
         </div>
         <div class="form-group">
-          <label class="form-label">Votre message *</label>
-          <textarea class="form-textarea" placeholder="Décrivez votre demande en détail…"></textarea>
+          <label class="form-label" for="contact-message">Votre message *</label>
+          <textarea class="form-textarea" id="contact-message" name="message" placeholder="Décrivez votre demande en détail…"></textarea>
         </div>
         <div class="form-group">
           <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.85rem;color:var(--text-muted);font-weight:300;">
-            <input type="checkbox" style="margin-top:2px;accent-color:var(--green);flex-shrink:0;"/>
-            J'ai lu et j'accepte la <a href="#" onclick="show('confidentialite');return false;" style="color:var(--green);text-decoration:underline;margin:0 4px;">politique de confidentialité</a> de FreshCut. Mes données seront utilisées uniquement pour traiter ma demande. *
+            <input type="checkbox" id="contact-rgpd" name="rgpd" style="margin-top:2px;accent-color:var(--green);flex-shrink:0;"/>
+            J'ai lu et j'accepte la <a href="#" onclick="show('confidentialite');return false;" style="color:var(--green);text-decoration:underline;margin:0 4px;">politique de confidentialité</a> de LeFruitier. Mes données seront utilisées uniquement pour traiter ma demande. *
           </label>
         </div>
         <button class="btn-submit" onclick="submitForm()">
@@ -866,12 +869,25 @@ const labels = {
   contact:'Contact'
 };
 
+// Chargement conditionnel des polices (conformité RGPD)
+(function(){
+  try {
+    const stored = JSON.parse(localStorage.getItem('cookie_consent'));
+    if (stored && stored.value === 'accepted' && stored.expires > Date.now()) {
+      const pc1 = document.createElement('link'); pc1.rel='preconnect'; pc1.href='https://fonts.googleapis.com'; document.head.appendChild(pc1);
+      const pc2 = document.createElement('link'); pc2.rel='preconnect'; pc2.href='https://fonts.gstatic.com'; pc2.crossOrigin='anonymous'; document.head.appendChild(pc2);
+      const lk = document.createElement('link'); lk.rel='stylesheet'; lk.href='https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap'; document.head.appendChild(lk);
+    }
+  } catch(e){}
+})();
+
 function show(id){
   pages.forEach(p=>{
     document.getElementById('page-'+p).classList.toggle('active', p===id);
     document.getElementById('btn-'+p).classList.toggle('active', p===id);
   });
   document.getElementById('topbar-label').textContent = labels[id];
+  document.title = 'LeFruitier — ' + labels[id];
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

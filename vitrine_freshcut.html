@@ -3,10 +3,38 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LeFruitier — Click & Collect Fruits & Smoothies</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<title>LeFruitier — Click & Collect Fruits & Smoothies à Paris</title>
+<meta name="description" content="LeFruitier : fruits découpés, smoothies et jus pressés en Click &amp; Collect à Paris. Commandez sur mobile, récupérez en boutique le jour même."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.lefruitier.fr/"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta property="og:title" content="LeFruitier — Click &amp; Collect Fruits &amp; Smoothies"/>
+<meta property="og:description" content="Fruits découpés, smoothies et jus pressés à commander sur mobile et à retirer en boutique. Aujourd'hui ou quand vous voulez."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.lefruitier.fr/"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="LeFruitier"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="LeFruitier — Click &amp; Collect Fruits &amp; Smoothies"/>
+<meta name="twitter:description" content="Fruits découpés, smoothies et jus pressés à commander sur mobile et à retirer en boutique."/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "LeFruitier",
+  "description": "Click &amp; Collect de fruits découpés, smoothies et jus pressés frais à Paris.",
+  "url": "https://www.lefruitier.fr/",
+  "servesCuisine": ["Fruits frais", "Smoothies", "Jus pressés"],
+  "priceRange": "€",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Paris",
+    "addressCountry": "FR"
+  }
+}
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -366,12 +394,16 @@
   .strip {
     background: var(--green);
     color: white;
-    padding: 1rem 5vw;
-    display: flex;
-    gap: 3rem;
-    overflow-x: auto;
-    align-items: center;
+    overflow: hidden;
+    position: relative;
   }
+  .strip-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+    padding: 1rem 0;
+  }
+  .strip:hover .strip-track { animation-play-state: paused; }
   .strip-item {
     display: flex;
     align-items: center;
@@ -381,8 +413,15 @@
     font-weight: 500;
     opacity: 0.9;
     flex-shrink: 0;
+    padding: 0 2rem;
+    border-right: 1px solid rgba(255,255,255,0.2);
   }
   .strip-item span { font-size: 1.1rem; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
 
   /* ——— SECTIONS ——— */
   section { padding: 6rem 5vw; }
@@ -755,6 +794,13 @@
     color: rgba(255,255,255,0.8);
   }
   .cookie-btn-decline:hover { background: rgba(255,255,255,0.18); }
+  .cookie-btn-manage {
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    text-decoration: underline;
+    font-size: 0.82rem;
+  }
+  .cookie-btn-manage:hover { color: white; background: transparent; }
   .cookie-btn-accept {
     background: var(--green-light);
     color: var(--dark);
@@ -774,20 +820,64 @@
 
   /* ——— RESPONSIVE ——— */
   @media (max-width: 900px) {
+    html, body { overflow-x: hidden; }
+
+    /* Nav */
+    .nav-links { display: none; }
+
+    /* Hero */
     .hero { grid-template-columns: 1fr; padding-top: 7rem; text-align: center; }
     .hero-sub { margin: 0 auto 2rem; }
     .hero-actions { justify-content: center; }
     .hero-visual { display: none; }
-    .features-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .nav-links { display: none; }
     .hero-tag { display: none; }
+
+    /* Sections générales */
+    section { padding: 4rem 5vw; }
+
+    /* Sections avec coins arrondis + marges latérales */
+    .products-section { margin: 0; border-radius: 1rem; padding: 4rem 5vw; }
+    .payment-section  { margin: 0; border-radius: 1rem; padding: 4rem 5vw; }
+    .cta-section      { margin: 0; border-radius: 1rem; padding: 4rem 5vw; }
+
+    /* Grilles */
+    .how-grid      { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .roles-grid    { grid-template-columns: 1fr; }
+    .dash-stat-row { grid-template-columns: 1fr 1fr; }
+
+    /* Features */
+    .features-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .features-visual  { padding: 1.5rem; }
+
+    /* Paiement */
+    .payment-logos { gap: 1rem; }
+    .pay-logo      { padding: 0.6rem 1.2rem; font-size: 0.95rem; }
+
+    /* Footer */
+    footer        { flex-direction: column; align-items: flex-start; }
+    .footer-links { gap: 1rem; }
+    .footer-copy  { margin-top: 0; }
+
+    /* Cookie banner */
+    .cookie-actions { flex-wrap: wrap; gap: 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title   { font-size: 2.2rem; }
+    .section-title { font-size: 1.75rem; }
+    .dash-stat-row { grid-template-columns: 1fr; }
+    .cookie-content { flex-direction: column; }
+    .cookie-actions { flex-direction: row; justify-content: space-between; }
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .cta-btns a { text-align: center; justify-content: center; }
   }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav aria-label="Navigation principale">
   <a href="#" class="nav-logo">Le<span>Fruitier</span></a>
   <ul class="nav-links">
     <li><a href="#how">Comment ça marche</a></li>
@@ -796,6 +886,8 @@
     <li><a href="#contact" class="nav-cta">Commander maintenant</a></li>
   </ul>
 </nav>
+
+<main>
 
 <!-- HERO -->
 <section class="hero">
@@ -888,13 +980,21 @@
 </section>
 
 <!-- STRIP -->
-<div class="strip">
-  <div class="strip-item"><span>🍊</span> Fruits de saison découpés</div>
-  <div class="strip-item"><span>🥤</span> Smoothies faits minute</div>
-  <div class="strip-item"><span>🍋</span> Jus fraîchement pressés</div>
-  <div class="strip-item"><span>⏱️</span> Retrait le jour même</div>
-  <div class="strip-item"><span>📱</span> iOS &amp; Android</div>
-  <div class="strip-item"><span>🔄</span> Abonnements disponibles</div>
+<div class="strip" role="marquee" aria-label="Nos services">
+  <div class="strip-track">
+    <div class="strip-item"><span>🍊</span> Fruits de saison découpés</div>
+    <div class="strip-item"><span>🥤</span> Smoothies faits minute</div>
+    <div class="strip-item"><span>🍋</span> Jus fraîchement pressés</div>
+    <div class="strip-item"><span>⏱️</span> Retrait le jour même</div>
+    <div class="strip-item"><span>📱</span> iOS &amp; Android</div>
+    <div class="strip-item"><span>🔄</span> Abonnements disponibles</div>
+    <div class="strip-item" aria-hidden="true"><span>🍊</span> Fruits de saison découpés</div>
+    <div class="strip-item" aria-hidden="true"><span>🥤</span> Smoothies faits minute</div>
+    <div class="strip-item" aria-hidden="true"><span>🍋</span> Jus fraîchement pressés</div>
+    <div class="strip-item" aria-hidden="true"><span>⏱️</span> Retrait le jour même</div>
+    <div class="strip-item" aria-hidden="true"><span>📱</span> iOS &amp; Android</div>
+    <div class="strip-item" aria-hidden="true"><span>🔄</span> Abonnements disponibles</div>
+  </div>
 </div>
 
 <!-- HOW IT WORKS -->
@@ -1100,11 +1200,11 @@
   <p class="section-sub" style="margin: 0 auto 1.5rem;">Carte bancaire via Stripe ou PayPal — deux solutions fiables et sécurisées, vos données ne transitent jamais en clair.</p>
   <div class="payment-logos">
     <div class="pay-logo">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#635BFF"><path d="M13.479 9.883c-2.088 0-3.519 1.049-3.519 2.643 0 1.594 1.431 2.642 3.519 2.642 2.089 0 3.52-1.048 3.52-2.642 0-1.594-1.431-2.643-3.52-2.643z"/><path fill-rule="evenodd" d="M0 12C0 5.373 5.373 0 12 0c6.628 0 12 5.373 12 12s-5.372 12-12 12S0 18.627 0 12zm12-8.5C7.253 3.5 3.5 7.253 3.5 12S7.253 20.5 12 20.5 20.5 16.747 20.5 12 16.747 3.5 12 3.5z" clip-rule="evenodd"/></svg>
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#635BFF"><path d="M13.479 9.883c-2.088 0-3.519 1.049-3.519 2.643 0 1.594 1.431 2.642 3.519 2.642 2.089 0 3.52-1.048 3.52-2.642 0-1.594-1.431-2.643-3.52-2.643z"/><path fill-rule="evenodd" d="M0 12C0 5.373 5.373 0 12 0c6.628 0 12 5.373 12 12s-5.372 12-12 12S0 18.627 0 12zm12-8.5C7.253 3.5 3.5 7.253 3.5 12S7.253 20.5 12 20.5 20.5 16.747 20.5 12 16.747 3.5 12 3.5z" clip-rule="evenodd"/></svg>
       Stripe
     </div>
     <div class="pay-logo">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H4.272a.641.641 0 0 1-.633-.74L5.784 2.85a.641.641 0 0 1 .634-.537h5.018c2.282 0 3.867.503 4.71 1.497.411.473.674 1.03.78 1.663.113.67.056 1.47-.175 2.421L16.7 8c.025-.14.04-.28.04-.416 0-.855-.303-1.565-.91-2.135C15.207 4.893 13.9 4.5 12.04 4.5H7.22L5.05 19.5h2.026V21.337z"/></svg>
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H4.272a.641.641 0 0 1-.633-.74L5.784 2.85a.641.641 0 0 1 .634-.537h5.018c2.282 0 3.867.503 4.71 1.497.411.473.674 1.03.78 1.663.113.67.056 1.47-.175 2.421L16.7 8c.025-.14.04-.28.04-.416 0-.855-.303-1.565-.91-2.135C15.207 4.893 13.9 4.5 12.04 4.5H7.22L5.05 19.5h2.026V21.337z"/></svg>
       PayPal
     </div>
   </div>
@@ -1122,19 +1222,22 @@
   </div>
 </section>
 
+</main>
+
 <!-- COOKIE BANNER -->
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentement aux cookies" aria-live="polite">
   <div class="cookie-content">
     <div class="cookie-text">
       <span class="cookie-icon">🍪</span>
       <div>
-        <strong>Nous utilisons des cookies</strong>
-        <p>Pour améliorer votre expérience, analyser le trafic et personnaliser le contenu. Vous pouvez choisir d'accepter ou de refuser les cookies non essentiels.</p>
+        <strong>Cookies &amp; confidentialité</strong>
+        <p>Nous utilisons des cookies analytiques et marketing (optionnels). Aucun cookie non essentiel n'est déposé avant votre accord. Google Fonts n'est chargé qu'avec votre consentement.</p>
       </div>
     </div>
     <div class="cookie-actions">
       <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Refuser</button>
-      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accepter</button>
+      <button id="cookie-manage" class="cookie-btn cookie-btn-manage">Personnaliser</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Tout accepter</button>
     </div>
   </div>
 </div>
@@ -1168,18 +1271,51 @@
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // Cookie banner
-  const cookieBanner = document.getElementById('cookie-banner');
-  if (localStorage.getItem('cookie_consent')) {
-    cookieBanner.classList.add('hidden');
+  // Google Fonts chargé uniquement après consentement (conformité RGPD)
+  function loadFonts() {
+    if (document.querySelector('link[data-fonts]')) return;
+    const pc1 = document.createElement('link');
+    pc1.rel = 'preconnect'; pc1.href = 'https://fonts.googleapis.com';
+    document.head.appendChild(pc1);
+    const pc2 = document.createElement('link');
+    pc2.rel = 'preconnect'; pc2.href = 'https://fonts.gstatic.com'; pc2.crossOrigin = 'anonymous';
+    document.head.appendChild(pc2);
+    const lk = document.createElement('link');
+    lk.rel = 'stylesheet';
+    lk.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap';
+    lk.dataset.fonts = 'true';
+    document.head.appendChild(lk);
   }
-  document.getElementById('cookie-accept').addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'accepted');
+
+  // Consentement avec expiration (13 mois — recommandation CNIL)
+  const CONSENT_KEY = 'cookie_consent';
+  const CONSENT_TTL = 13 * 30 * 24 * 60 * 60 * 1000;
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(CONSENT_KEY)); } catch { return null; }
+  }
+  function setConsent(value) {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({ value, expires: Date.now() + CONSENT_TTL }));
+  }
+
+  const cookieBanner = document.getElementById('cookie-banner');
+  const stored = getConsent();
+  if (stored && stored.expires > Date.now()) {
     cookieBanner.classList.add('hidden');
+    if (stored.value === 'accepted') loadFonts();
+  }
+
+  document.getElementById('cookie-accept').addEventListener('click', () => {
+    setConsent('accepted');
+    cookieBanner.classList.add('hidden');
+    loadFonts();
   });
   document.getElementById('cookie-decline').addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'declined');
+    setConsent('declined');
     cookieBanner.classList.add('hidden');
+  });
+  document.getElementById('cookie-manage').addEventListener('click', () => {
+    window.location.href = 'freshcut_legal.html#cookies';
   });
 
   // Nav scroll effect
